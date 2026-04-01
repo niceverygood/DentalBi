@@ -103,25 +103,16 @@ export default function LoginPage() {
           )}
         </div>
 
-        {/* 데모 안내 */}
-        <div className="mt-4 bg-white/60 backdrop-blur rounded-xl border p-4" style={{ borderColor: "#E2E8F0" }}>
-          <p className="text-xs font-medium mb-2" style={{ color: "#1E293B" }}>🔑 테스트 계정:</p>
-          <div className="space-y-1 text-xs" style={{ color: "#64748B" }}>
-            <div className="flex justify-between">
-              <span>총괄관리자</span>
-              <span className="font-mono">hss@bottlecorp.kr</span>
-            </div>
-            <div className="flex justify-between">
-              <span>병원 Owner</span>
-              <span className="font-mono">kim@clinic.com</span>
-            </div>
-            <div className="flex justify-between">
-              <span>데모 계정</span>
-              <span className="font-mono">아무 이메일 입력</span>
-            </div>
-          </div>
-          <p className="text-[10px] mt-2" style={{ color: "#94A3B8" }}>* 테스트 단계: 비밀번호 아무거나 입력 가능</p>
-        </div>
+        {/* 테스트 계정 로그인 버튼 */}
+        <button
+          onClick={() => login("demo@test.com", "test1234")}
+          className="mt-4 w-full py-3 rounded-xl border-2 border-dashed text-sm font-medium transition-all hover:border-solid hover:shadow-sm flex items-center justify-center gap-2"
+          style={{ borderColor: "#BFDBFE", color: "#1A56DB", backgroundColor: "rgba(239,246,255,0.6)" }}
+          onMouseEnter={(e) => { e.currentTarget.style.backgroundColor = "#EFF6FF"; e.currentTarget.style.borderColor = "#1A56DB"; }}
+          onMouseLeave={(e) => { e.currentTarget.style.backgroundColor = "rgba(239,246,255,0.6)"; e.currentTarget.style.borderColor = "#BFDBFE"; }}
+        >
+          🧪 테스트 계정으로 로그인
+        </button>
 
         {/* 하단 슬로건 */}
         <p className="text-center text-xs mt-6" style={{ color: "#94A3B8" }}>
