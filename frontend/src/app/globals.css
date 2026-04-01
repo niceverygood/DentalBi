@@ -1,0 +1,82 @@
+@import url("https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.min.css");
+@import url("https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&display=swap");
+@import "tailwindcss";
+
+/* ── 덴비(DenBI) 디자인 시스템 ── */
+@theme {
+  --font-sans: "Pretendard", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, SFMono-Regular, monospace;
+
+  /* 브랜드 컬러 — 덴비(DenBI) */
+  --color-denbi-primary:   #1A56DB;
+  --color-denbi-ai:        #38BDF8;
+  --color-denbi-dark:      #0F172A;
+  --color-denbi-light:     #EFF6FF;
+  --color-denbi-mid:       #BFDBFE;
+
+  /* 시맨틱 컬러 */
+  --color-denbi-success:   #22C55E;
+  --color-denbi-warning:   #F59E0B;
+  --color-denbi-danger:    #EF4444;
+  --color-denbi-insight:   #8B5CF6;
+
+  /* 그레이 스케일 */
+  --color-denbi-gray:      #64748B;
+  --color-denbi-gray-light:#F8FAFC;
+  --color-denbi-text:      #1E293B;
+  --color-denbi-border:    #E2E8F0;
+
+  /* 레거시 호환 (Tailwind 클래스 참조용) */
+  --color-primary-50:  #EFF6FF;
+  --color-primary-100: #DBEAFE;
+  --color-primary-500: #1A56DB;
+  --color-primary-600: #1A56DB;
+  --color-primary-700: #1E40AF;
+}
+
+/* ── 전역 스타일 ── */
+body {
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  color: var(--color-denbi-text);
+}
+
+/* 숫자/금액/차트라벨 전용 폰트 */
+.font-mono-num {
+  font-family: var(--font-mono);
+  font-variant-numeric: tabular-nums;
+}
+
+/* 커스텀 스크롤바 */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: #d1d5db;
+  border-radius: 3px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #9ca3af;
+}
+
+/* 애니메이션 */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(8px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+.animate-fade-in {
+  animation: fadeIn 0.3s ease-out;
+}
+
+@keyframes pulse-dot {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.5; }
+}
+.animate-pulse-dot {
+  animation: pulse-dot 2s ease-in-out infinite;
+}

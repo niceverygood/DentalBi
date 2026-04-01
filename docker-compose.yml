@@ -1,0 +1,80 @@
+# DentalBI - Docker Compose 배포 설정
+# 사용법: docker-compose up -d
+
+version: "3.8"
+
+services:
+  # ─── Backend API Server ───
+  api:
+    build:
+      context: .
+      dockerfile: Dockerfile.api
+    container_name: dentalbi-api
+    ports:
+      - "8000:8000"
+    environment:
+      - MSSQL_HOST=${MSSQL_HOST:-192.168.0.100}
+      - MSSQL_PORT=${MSSQL_PORT:-1433}
+      - MSSQL_DATABASE=${MSSQL_DATABASE:-hanaro}
+      - MSSQL_USER=${MSSQL_USER:-dentalbi_reader}
+      - MSSQL_PASSWORD=${MSSQL_PASSWORD:-}
+      - CHART_TYPE=${CHART_TYPE:-hanaro}
+      - CLAUDE_API_KEY=${CLAUDE_API_KEY:-}
+      - DATABASE_URL=postgresql://dentalbi:dentalbi@postgres:5432/dentalbi
+      - REDIS_URL=redis://redis:6379
+    depends_on:
+      - postgres
+      - redis
+    restart: unless-stopped
+    networks:
+      - dentalbi
+
+  # ─── Frontend (Next.js) ───
+  web:
+    build:
+      context: .
+      dockerfile: Dockerfile.web
+    container_name: dentalbi-web
+    ports:
+      - "3000:3000"
+    environment:
+      - NEXT_PUBLIC_API_URL=http://api:8000
+    depends_on:
+      - api
+    restart: unless-stopped
+    networks:
+      - dentalbi
+
+  # ─── PostgreSQL (SaaS 메타데이터) ───
+  postgres:
+    image: postgres:16-alpine
+    container_name: dentalbi-postgres
+    environment:
+      - POSTGRES_DB=dentalbi
+      - POSTGRES_USER=dentalbi
+      - POSTGRES_PASSWORD=dentalbi
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+      - ./init.sql:/docker-entrypoint-initdb.d/init.sql
+    ports:
+      - "5432:5432"
+    restart: unless-stopped
+    networks:
+      - dentalbi
+
+  # ─── Redis (캐시) ───
+  redis:
+    image: redis:7-alpine
+    container_name: dentalbi-redis
+    ports:
+      - "6379:6379"
+    restart: unless-stopped
+    networks:
+      - dentalbi
+
+volumes:
+  postgres_data:
+
+networks:
+  dentalbi:
+    driver: bridge
