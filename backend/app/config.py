@@ -32,6 +32,14 @@ class Settings(BaseSettings):
     # ─── Redis ───
     redis_url: str = "redis://localhost:6379"
 
+    # ─── Supabase (녹음 파일 저장) ───
+    supabase_url: str = ""
+    supabase_key: str = ""
+    supabase_bucket: str = "call-recordings"
+
+    # ─── OpenAI Whisper (STT) ───
+    openai_api_key: str = ""
+
     class Config:
         env_file = ".env"
         env_file_encoding = "utf-8"

@@ -7,7 +7,7 @@ import { DOCTORS } from "./constants";
 import type {
   DoctorStats, MonthlyTrend, PaymentDay, TxMixItem,
   LostPatient, TurnawayMonth, NewPatientByPeriod,
-  ChairHeatmapCell, AIInsight,
+  ChairHeatmapCell, AIInsight, CallRecord, CRMStats,
 } from "@/types";
 
 /** 월별 수익 추이 데이터 생성 */
@@ -136,6 +136,154 @@ export function genChairHeatmap(): ChairHeatmapCell[] {
     });
   });
   return data;
+}
+
+/** CRM 통화 기록 데모 데이터 */
+export function genCallRecords(): CallRecord[] {
+  return [
+    {
+      id: 1,
+      patientName: "한**",
+      staffName: "데스크 김",
+      phoneNumber: "010-****-8801",
+      direction: "outbound",
+      status: "completed",
+      duration: 185,
+      callResult: "appointment",
+      aiSummary: {
+        summary: "환자에게 보철 세팅 미내원 건으로 연락. 환자는 업무가 바빠서 못 왔다고 하며, 다음주 수요일 오후 2시에 예약 완료.",
+        reason: "리콜",
+        outcome: "예약완료",
+        next_steps: ["3/12(수) 14:00 예약 확인 문자 발송", "보철물 준비 지시"],
+        sentiment: "긍정",
+        recommended_result: "appointment",
+      },
+      notes: "환자 컨디션 좋음. 보철물 미리 준비해둘 것.",
+      pendingTx: "보철 인상 후 세팅 미내원",
+      riskScore: 95,
+      createdAt: "2026-04-04T10:30:00",
+    },
+    {
+      id: 2,
+      patientName: "김**",
+      staffName: "데스크 박",
+      phoneNumber: "010-****-3421",
+      direction: "outbound",
+      status: "completed",
+      duration: 42,
+      callResult: "no_answer",
+      aiSummary: {
+        summary: "전화 3회 시도했으나 부재중. 문자 메시지 남김.",
+        reason: "리콜",
+        outcome: "부재중",
+        next_steps: ["내일 오전 재시도", "카카오 알림톡 발송"],
+        sentiment: "불확실",
+        recommended_result: "no_answer",
+      },
+      pendingTx: "발치 후 임플란트 미진행 (#36)",
+      riskScore: 92,
+      createdAt: "2026-04-04T11:15:00",
+    },
+    {
+      id: 3,
+      patientName: "이**",
+      staffName: "데스크 김",
+      phoneNumber: "010-****-7812",
+      direction: "outbound",
+      status: "completed",
+      duration: 310,
+      callResult: "callback",
+      aiSummary: {
+        summary: "크라운 미진행 건으로 연락. 환자는 비용 부담을 호소하며 보험 적용 여부를 질문. 원장님 상담 후 결정하겠다고 함.",
+        reason: "리콜",
+        outcome: "콜백예정",
+        next_steps: ["이원장에게 상담 요청 전달", "비용 안내 자료 카톡 발송", "4/8 콜백 예정"],
+        sentiment: "중립",
+        recommended_result: "callback",
+      },
+      notes: "비용 상담 필요. 분할납부 안내 포함.",
+      pendingTx: "근관치료 후 크라운 미진행 (#26)",
+      riskScore: 87,
+      scheduledCallback: "2026-04-08T14:00:00",
+      createdAt: "2026-04-03T15:45:00",
+    },
+    {
+      id: 4,
+      patientName: "박**",
+      staffName: "데스크 박",
+      phoneNumber: "010-****-5567",
+      direction: "outbound",
+      status: "completed",
+      duration: 95,
+      callResult: "refused",
+      aiSummary: {
+        summary: "환자가 다른 치과에서 이미 치료받았다고 함. 더이상 연락하지 말아달라고 요청.",
+        reason: "리콜",
+        outcome: "거부",
+        next_steps: ["환자 리콜 목록에서 제외", "이탈 사유 기록"],
+        sentiment: "부정",
+        recommended_result: "refused",
+      },
+      notes: "타원 전환. 리콜 제외 처리.",
+      pendingTx: "발치 후 브릿지 미진행 (#45,46)",
+      riskScore: 85,
+      createdAt: "2026-04-03T10:20:00",
+    },
+    {
+      id: 5,
+      patientName: "최**",
+      staffName: "데스크 김",
+      phoneNumber: "010-****-9034",
+      direction: "outbound",
+      status: "completed",
+      duration: 220,
+      callResult: "appointment",
+      aiSummary: {
+        summary: "임플란트 2차수술 미내원 건 연락. 환자는 수술 두려움으로 미루고 있었다고 함. 원장님이 걱정 없다고 말씀드리겠다고 안내 후 예약 완료.",
+        reason: "리콜",
+        outcome: "예약완료",
+        next_steps: ["4/10(목) 10:00 예약", "수술 안내문 카톡 발송", "김원장에게 환자 불안감 전달"],
+        sentiment: "긍정",
+        recommended_result: "appointment",
+      },
+      pendingTx: "임플란트 2차수술 미내원",
+      riskScore: 78,
+      createdAt: "2026-04-02T14:00:00",
+    },
+    {
+      id: 6,
+      patientName: "정**",
+      staffName: "데스크 박",
+      phoneNumber: "010-****-2290",
+      direction: "inbound",
+      status: "completed",
+      duration: 130,
+      callResult: "appointment",
+      aiSummary: {
+        summary: "환자가 직접 전화하여 교정 체크 예약 문의. 이번 주 토요일 가능 여부 확인 후 예약 완료.",
+        reason: "예약확인",
+        outcome: "예약완료",
+        next_steps: ["4/5(토) 11:00 교정 체크 예약"],
+        sentiment: "긍정",
+        recommended_result: "appointment",
+      },
+      pendingTx: "교정 월 체크 미내원 (2개월)",
+      riskScore: 74,
+      createdAt: "2026-04-02T09:30:00",
+    },
+  ];
+}
+
+/** CRM 통계 데모 데이터 */
+export function genCRMStats(): CRMStats {
+  return {
+    totalCallsToday: 8,
+    contactRate: 72.5,
+    callbacksScheduled: 3,
+    successfulRecalls: 4,
+    totalCallsPeriod: 47,
+    avgDuration: 156,
+  };
 }
 
 /** AI 인사이트 데모 데이터 */

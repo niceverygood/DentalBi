@@ -1,0 +1,49 @@
+name: dentalbi_recorder
+description: DentalBI 통화 녹음 자동 업로드 앱
+
+publish_to: 'none'
+version: 1.0.0+1
+
+environment:
+  sdk: '>=3.2.0 <4.0.0'
+
+dependencies:
+  flutter:
+    sdk: flutter
+
+  # 상태관리
+  provider: ^6.1.1
+
+  # HTTP
+  http: ^1.2.0
+  dio: ^5.4.0
+
+  # 전화 상태 감지
+  phone_state: ^2.0.0
+
+  # 파일 시스템
+  path_provider: ^2.1.2
+  path: ^1.9.0
+
+  # 권한 관리
+  permission_handler: ^11.3.0
+
+  # 로컬 저장소
+  shared_preferences: ^2.2.2
+
+  # 백그라운드 서비스
+  flutter_background_service: ^5.0.5
+
+  # 알림
+  flutter_local_notifications: ^17.0.0
+
+  # 포맷
+  intl: ^0.19.0
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^4.0.0
+
+flutter:
+  uses-material-design: true

@@ -107,12 +107,40 @@ CREATE TABLE IF NOT EXISTS ai_insights (
     is_resolved     BOOLEAN DEFAULT FALSE
 );
 
+-- ─── 통화 기록 (CRM) ───
+CREATE TABLE IF NOT EXISTS call_records (
+    id              SERIAL PRIMARY KEY,
+    clinic_id       INTEGER REFERENCES clinics(id),
+    patient_hash    VARCHAR(64),                -- 환자ID 해시 (PII 비식별화)
+    patient_name    VARCHAR(100),               -- 마스킹된 환자명 (김**)
+    staff_user_id   INTEGER REFERENCES users(id),
+    staff_name      VARCHAR(100),
+    phone_number    VARCHAR(20),                -- 마스킹 처리 (010-****-1234)
+    direction       VARCHAR(10) DEFAULT 'outbound' CHECK (direction IN ('inbound', 'outbound')),
+    status          VARCHAR(20) DEFAULT 'pending' CHECK (status IN ('pending', 'processing', 'completed', 'failed')),
+    duration        INTEGER DEFAULT 0,          -- 통화 시간 (초)
+    recording_url   TEXT,                       -- Supabase Storage URL
+    transcript      TEXT,                       -- STT 전사 결과
+    ai_summary      JSONB,                      -- AI 요약 { summary, reason, outcome, next_steps, sentiment }
+    call_result     VARCHAR(30) CHECK (call_result IN ('appointment', 'callback', 'no_answer', 'refused', 'other')),
+    notes           TEXT,                       -- 직원 메모
+    scheduled_callback TIMESTAMP,               -- 콜백 예정 시각
+    pending_tx      VARCHAR(200),               -- 미완료 진료 (환자 컨텍스트)
+    risk_score      FLOAT,                      -- 이탈 위험도 (환자 컨텍스트)
+    created_at      TIMESTAMP DEFAULT NOW(),
+    updated_at      TIMESTAMP DEFAULT NOW()
+);
+
 -- ─── 인덱스 ───
 CREATE INDEX idx_doctor_stats_clinic_date ON daily_doctor_stats(clinic_id, stat_date);
 CREATE INDEX idx_payment_stats_clinic_date ON daily_payment_stats(clinic_id, stat_date);
 CREATE INDEX idx_risk_scores_clinic ON patient_risk_scores(clinic_id, risk_type);
 CREATE INDEX idx_tx_mix_clinic_date ON tx_mix_daily(clinic_id, stat_date);
 CREATE INDEX idx_insights_clinic ON ai_insights(clinic_id, generated_at DESC);
+CREATE INDEX idx_call_records_clinic ON call_records(clinic_id, created_at DESC);
+CREATE INDEX idx_call_records_patient ON call_records(clinic_id, patient_hash);
+CREATE INDEX idx_call_records_staff ON call_records(clinic_id, staff_user_id);
+CREATE INDEX idx_call_records_status ON call_records(clinic_id, call_result);
 
 -- ─── 초기 데모 데이터 ───
 INSERT INTO clinics (name, plan, ehr_type) VALUES

@@ -8,7 +8,7 @@ from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 
 from app.config import settings
-from app.routers import auth, admin, superadmin, ai
+from app.routers import auth, admin, superadmin, ai, crm
 
 # ═══════════════════════════════════════
 # FastAPI 앱 생성
@@ -33,6 +33,7 @@ app.include_router(auth.router)
 app.include_router(admin.router)
 app.include_router(superadmin.router)
 app.include_router(ai.router)
+app.include_router(crm.router)
 
 
 # ═══════════════════════════════════════

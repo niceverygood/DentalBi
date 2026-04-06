@@ -5,6 +5,7 @@
 import {
   Activity, BarChart3, DollarSign, Target, UserMinus,
   UserPlus, Clock, Brain, Settings, ShieldCheck, Crown,
+  PhoneCall,
 } from "lucide-react";
 import type { Doctor, NavItem } from "@/types";
 
@@ -27,6 +28,7 @@ export const NAV_ITEMS: NavItem[] = [
   { id: "revenue",       label: "수납 관리",        href: "/revenue",       icon: DollarSign },
   { id: "txmix",         label: "진료내역(TxMix)",  href: "/txmix",         icon: Target },
   { id: "patients",      label: "환자 이탈 관리",   href: "/patients",      icon: UserMinus },
+  { id: "crm",           label: "CRM 통화관리",    href: "/crm",           icon: PhoneCall },
   { id: "newpatients",   label: "신환 분석",        href: "/newpatients",   icon: UserPlus },
   { id: "chair",         label: "체어 가동률",      href: "/chair",         icon: Clock },
   { id: "insights",      label: "AI 인사이트",      href: "/insights",      icon: Brain },

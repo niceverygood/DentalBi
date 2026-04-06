@@ -9,7 +9,7 @@ import { useState, useEffect, useMemo } from "react";
 import {
   genMonthlyData, genDoctorStats, genPaymentData, genTxMixData,
   genLostPatients, genTurnawayData, genNewPatientByPeriod,
-  genChairHeatmap, AI_INSIGHTS,
+  genChairHeatmap, AI_INSIGHTS, genCallRecords, genCRMStats,
 } from "@/lib/demoData";
 
 /** 모든 대시보드 데이터를 한번에 로드하는 훅 */
@@ -26,6 +26,8 @@ export function useDashboardData() {
   const newPtByPeriod = useMemo(() => genNewPatientByPeriod(), []);
   const chairHeatmap = useMemo(() => genChairHeatmap(), []);
   const insights = AI_INSIGHTS;
+  const callRecords = useMemo(() => genCallRecords(), []);
+  const crmStats = useMemo(() => genCRMStats(), []);
 
   // 집계 KPI
   const totalRevenue = useMemo(
@@ -70,6 +72,8 @@ export function useDashboardData() {
     newPtByPeriod,
     chairHeatmap,
     insights,
+    callRecords,
+    crmStats,
     // 집계 KPI
     totalRevenue,
     totalNewPt,

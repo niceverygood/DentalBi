@@ -237,6 +237,48 @@ export interface ClinicInfo {
 }
 
 // ═══════════════════════════════════════
+// CRM 통화 기록
+// ═══════════════════════════════════════
+
+/** 통화 기록 */
+export interface CallRecord {
+  id: number;
+  patientName?: string;
+  staffName?: string;
+  phoneNumber?: string;
+  direction: "inbound" | "outbound";
+  status: "pending" | "processing" | "completed" | "failed";
+  duration: number;              // 초
+  callResult?: "appointment" | "callback" | "no_answer" | "refused" | "other";
+  aiSummary?: CallSummary;
+  notes?: string;
+  pendingTx?: string;
+  riskScore?: number;
+  scheduledCallback?: string;
+  createdAt?: string;
+}
+
+/** AI 통화 요약 */
+export interface CallSummary {
+  summary: string;
+  reason: string;
+  outcome: string;
+  next_steps: string[];
+  sentiment: string;
+  recommended_result?: string;
+}
+
+/** CRM 통계 */
+export interface CRMStats {
+  totalCallsToday: number;
+  contactRate: number;           // %
+  callbacksScheduled: number;
+  successfulRecalls: number;
+  totalCallsPeriod: number;
+  avgDuration: number;           // 초
+}
+
+// ═══════════════════════════════════════
 // UI 컴포넌트 Props
 // ═══════════════════════════════════════
 
