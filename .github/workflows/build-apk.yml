@@ -1,0 +1,72 @@
+name: Build APK
+
+on:
+  push:
+    paths:
+      - 'mobile/**'
+    branches: [main]
+  workflow_dispatch:  # 수동 실행 가능
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: mobile
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Java
+        uses: actions/setup-java@v4
+        with:
+          distribution: 'temurin'
+          java-version: '17'
+
+      - name: Set up Flutter
+        uses: subosito/flutter-action@v2
+        with:
+          flutter-version: '3.24.0'
+          channel: 'stable'
+
+      - name: Get dependencies
+        run: flutter pub get
+
+      - name: Build APK
+        run: flutter build apk --release
+
+      - name: Rename APK
+        run: mv build/app/outputs/flutter-apk/app-release.apk build/app/outputs/flutter-apk/dentalbi-recorder.apk
+
+      - name: Upload APK artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: dentalbi-recorder-apk
+          path: mobile/build/app/outputs/flutter-apk/dentalbi-recorder.apk
+
+      - name: Create Release
+        uses: softprops/action-gh-release@v2
+        with:
+          tag_name: v1.0.0-recorder
+          name: "덴비 녹음 앱 v1.0.0"
+          body: |
+            ## 덴비 녹음 앱 (Android)
+
+            통화 녹음을 자동으로 감지하여 DentalBI CRM에 업로드하는 앱입니다.
+
+            ### 설치 방법
+            1. `dentalbi-recorder.apk` 파일을 다운로드합니다
+            2. 안드로이드 설정 → 보안 → "출처를 알 수 없는 앱 설치" 허용
+            3. APK 파일을 열어 설치합니다
+            4. 전화, 저장소, 알림 권한을 허용합니다
+            5. 덴비 계정으로 로그인합니다
+
+            ### 주요 기능
+            - 통화 종료 시 녹음 파일 자동 감지
+            - 서버로 자동 업로드
+            - AI 통화 요약 (Whisper STT + Claude)
+            - CRM 자동 기록
+          files: mobile/build/app/outputs/flutter-apk/dentalbi-recorder.apk
+          make_latest: true
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
