@@ -71,6 +71,7 @@ export default function RootLayout({
 }) {
   const pathname = usePathname();
   const isLoginPage = pathname === "/login";
+  const isPublicPage = pathname.startsWith("/download");
 
   return (
     <html lang="ko" className="h-full antialiased">
@@ -84,7 +85,7 @@ export default function RootLayout({
       </head>
       <body className="h-full">
         <AuthProvider>
-          {isLoginPage ? children : <AuthenticatedLayout>{children}</AuthenticatedLayout>}
+          {(isLoginPage || isPublicPage) ? children : <AuthenticatedLayout>{children}</AuthenticatedLayout>}
         </AuthProvider>
       </body>
     </html>

@@ -9,7 +9,7 @@ import { useRef } from "react";
 import { QRCodeSVG } from "qrcode.react";
 import { Printer, Phone } from "lucide-react";
 
-const DOWNLOAD_PAGE_URL = "https://dentalbi.kr/download";
+const DOWNLOAD_PAGE_URL = "https://denbi.vercel.app/download";
 
 export default function QRPrintPage() {
   const printRef = useRef<HTMLDivElement>(null);
@@ -80,7 +80,7 @@ export default function QRPrintPage() {
 
           {/* 하단 URL */}
           <div className="mt-6 pt-4 border-t border-gray-100 text-center">
-            <p className="text-[11px] text-gray-400">dentalbi.kr/download</p>
+            <p className="text-[11px] text-gray-400">denbi.vercel.app/download</p>
           </div>
         </div>
       </div>
