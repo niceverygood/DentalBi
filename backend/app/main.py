@@ -9,6 +9,7 @@ from fastapi.middleware.cors import CORSMiddleware
 
 from app.config import settings
 from app.routers import auth, admin, superadmin, ai, crm
+from app.routers import dashboard, doctors, patients, revenue, connection
 
 # ═══════════════════════════════════════
 # FastAPI 앱 생성
@@ -35,6 +36,13 @@ app.include_router(superadmin.router)
 app.include_router(ai.router)
 app.include_router(crm.router)
 
+# ─── 대시보드 (MSSQL 연동) 라우터 ───
+app.include_router(dashboard.router)
+app.include_router(doctors.router)
+app.include_router(patients.router)
+app.include_router(revenue.router)
+app.include_router(connection.router)
+
 
 # ═══════════════════════════════════════
 # 헬스 체크
@@ -49,9 +57,8 @@ async def health_check():
     }
 
 
-# ─── 기존 backend_main.py의 엔드포인트들은
-# ─── 추후 app/routers/dashboard.py 등으로 분리 예정
-# ─── 현재는 인증 시스템만 구현
+# ─── MSSQL 대시보드 엔드포인트 구현 완료
+# ─── 다중 전자차트 어댑터: hanaro, dentweb, oneclick
 
 
 @app.on_event("startup")
