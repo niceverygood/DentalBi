@@ -8,6 +8,8 @@
     "start": "next start"
   },
   "dependencies": {
+    "@supabase/ssr": "^0.10.2",
+    "@supabase/supabase-js": "^2.103.0",
     "axios": "^1.14.0",
     "js-cookie": "^3.0.5",
     "lucide-react": "^1.7.0",
