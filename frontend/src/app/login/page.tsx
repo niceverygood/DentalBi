@@ -27,7 +27,7 @@ export default function LoginPage() {
   return (
     <div
       className="min-h-screen flex items-center justify-center p-4"
-      style={{ background: "linear-gradient(135deg, #F8FAFC 0%, #EFF6FF 100%)" }}
+      style={{ backgroundColor: "#F8FAFC" }}
     >
       <div className="w-full max-w-md">
         {/* 세션 만료 알림 (다른 기기에서 로그인) */}
@@ -48,19 +48,15 @@ export default function LoginPage() {
 
         {/* 로고 — 덴비 */}
         <div className="text-center mb-8">
-          {/* D 심볼 */}
-          <div className="relative inline-flex items-center justify-center w-16 h-16 rounded-2xl mb-4" style={{ backgroundColor: "#1A56DB" }}>
-            <span className="text-white font-bold text-3xl leading-none">D</span>
-            <div className="absolute -top-1.5 -right-1.5 w-4 h-4 rounded-full" style={{ backgroundColor: "#38BDF8" }} />
-          </div>
-          <h1 className="text-2xl font-bold" style={{ color: "#1E293B" }}>
-            덴비 <span className="text-sm font-medium" style={{ color: "#64748B" }}>DenBI</span>
+          <img src="/logo.svg" alt="덴비" width={56} height={56} className="mx-auto mb-3 rounded-xl" />
+          <h1 className="text-3xl font-bold mb-1" style={{ color: "#1A56DB" }}>
+            덴비 <span className="text-sm font-normal" style={{ color: "#94A3B8" }}>DenBI</span>
           </h1>
-          <p className="text-sm mt-1 italic" style={{ color: "#64748B" }}>AI가 경영을 봅니다</p>
+          <p className="text-sm" style={{ color: "#94A3B8" }}>AI가 경영을 봅니다</p>
         </div>
 
         {/* 카드 */}
-        <div className="bg-white rounded-2xl shadow-lg border p-8" style={{ borderColor: "#E2E8F0" }}>
+        <div className="bg-white rounded-2xl border p-8" style={{ borderColor: "#E2E8F0" }}>
           {/* 탭 */}
           <div className="flex bg-gray-100 rounded-lg p-1 mb-6">
             <button

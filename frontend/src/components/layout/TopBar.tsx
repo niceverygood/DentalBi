@@ -115,7 +115,7 @@ export default function TopBar({
       case "warning": return <AlertTriangle size={14} className="text-amber-500" />;
       case "success": return <TrendingUp size={14} className="text-emerald-500" />;
       case "patient": return <UserPlus size={14} className="text-blue-500" />;
-      default: return <Bell size={14} className="text-violet-500" />;
+      default: return <Bell size={14} style={{ color: "#1A56DB" }} />;
     }
   };
 
@@ -214,7 +214,7 @@ export default function TopBar({
                       <div className={`w-8 h-8 rounded-lg flex items-center justify-center flex-shrink-0 ${
                         notif.type === "warning" ? "bg-amber-100" :
                         notif.type === "success" ? "bg-emerald-100" :
-                        notif.type === "patient" ? "bg-blue-100" : "bg-violet-100"
+                        notif.type === "patient" ? "bg-blue-100" : "bg-blue-50"
                       }`}>
                         <NotifIcon type={notif.type} />
                       </div>

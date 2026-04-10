@@ -136,7 +136,7 @@ export interface PaymentDay {
   cash: number;
   cashReceipt: number;
   online: number;
-  corp: number;
+  corpFee: number;
 }
 
 /** 수납 구성비 파이 데이터 */

@@ -1,0 +1,13 @@
+<svg width="512" height="512" viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg">
+  <rect width="512" height="512" rx="64" fill="#1A56DB"/>
+  <!-- 왼쪽 상단: 큰 흰색 사각형 -->
+  <rect x="80" y="80" width="160" height="160" rx="12" fill="#FFFFFF"/>
+  <!-- 오른쪽 상단: 연파랑 사각형 2개 -->
+  <rect x="272" y="80" width="160" height="72" rx="12" fill="#8DAAF0"/>
+  <rect x="272" y="168" width="160" height="72" rx="12" fill="#8DAAF0"/>
+  <!-- 중간: 가로 긴 바 -->
+  <rect x="80" y="272" width="352" height="72" rx="12" fill="#8DAAF0"/>
+  <!-- 하단: 사각형 2개 -->
+  <rect x="80" y="368" width="160" height="72" rx="12" fill="#8DAAF0"/>
+  <rect x="272" y="368" width="160" height="72" rx="12" fill="#6B8FE0"/>
+</svg>

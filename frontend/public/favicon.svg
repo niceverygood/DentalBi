@@ -1,5 +1,13 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32">
-  <rect width="32" height="32" rx="6" fill="#1A56DB"/>
-  <text x="8" y="24" font-family="Arial,sans-serif" font-weight="bold" font-size="22" fill="white">D</text>
-  <circle cx="25" cy="8" r="4" fill="#38BDF8"/>
+<svg width="32" height="32" viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg">
+  <rect width="32" height="32" rx="4" fill="#1A56DB"/>
+  <!-- 왼쪽 상단: 큰 흰색 사각형 -->
+  <rect x="5" y="5" width="10" height="10" rx="1" fill="#FFFFFF"/>
+  <!-- 오른쪽 상단: 연파랑 사각형 2개 -->
+  <rect x="17" y="5" width="10" height="4.5" rx="1" fill="#8DAAF0"/>
+  <rect x="17" y="10.5" width="10" height="4.5" rx="1" fill="#8DAAF0"/>
+  <!-- 중간: 가로 긴 바 -->
+  <rect x="5" y="17" width="22" height="4.5" rx="1" fill="#8DAAF0"/>
+  <!-- 하단: 사각형 2개 -->
+  <rect x="5" y="23" width="10" height="4.5" rx="1" fill="#8DAAF0"/>
+  <rect x="17" y="23" width="10" height="4.5" rx="1" fill="#6B8FE0"/>
 </svg>

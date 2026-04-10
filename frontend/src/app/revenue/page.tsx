@@ -24,9 +24,9 @@ export default function RevenuePage() {
     const cash = paymentData.reduce((s, d) => s + d.cash, 0);
     const cashReceipt = paymentData.reduce((s, d) => s + d.cashReceipt, 0);
     const online = paymentData.reduce((s, d) => s + d.online, 0);
-    const corp = paymentData.reduce((s, d) => s + d.corp, 0);
-    const grand = card + cash + cashReceipt + online + corp;
-    return { card, cash, cashReceipt, online, corp, grand };
+    const corpFee = paymentData.reduce((s, d) => s + d.corpFee, 0);
+    const grand = card + cash + cashReceipt + online + corpFee;
+    return { card, cash, cashReceipt, online, corpFee, grand };
   }, [paymentData]);
 
   // 파이 차트 데이터
@@ -35,7 +35,7 @@ export default function RevenuePage() {
     { name: "현금",       value: totals.cash,        color: "#22C55E" },
     { name: "현금영수증", value: totals.cashReceipt,  color: "#8B5CF6" },
     { name: "온라인",     value: totals.online,      color: "#F59E0B" },
-    { name: "공단부담금", value: totals.corp,         color: "#0891B2" },
+    { name: "공단부담금", value: totals.corpFee,         color: "#0891B2" },
   ], [totals]);
 
   const pct = (v: number) => Math.round(v / totals.grand * 100) + "%";
@@ -49,7 +49,7 @@ export default function RevenuePage() {
         <KPICard label="현금 수납" value={fmtWon(totals.cash)} sub={pct(totals.cash)} icon={DollarSign} color="green" />
         <KPICard label="현금영수증" value={fmtWon(totals.cashReceipt)} sub={pct(totals.cashReceipt)} icon={DollarSign} color="amber" />
         <KPICard label="온라인" value={fmtWon(totals.online)} sub={pct(totals.online)} icon={DollarSign} color="cyan" />
-        <KPICard label="공단부담금" value={fmtWon(totals.corp)} sub={pct(totals.corp)} icon={DollarSign} color="red" />
+        <KPICard label="공단부담금" value={fmtWon(totals.corpFee)} sub={pct(totals.corpFee)} icon={DollarSign} color="red" />
       </div>
 
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">

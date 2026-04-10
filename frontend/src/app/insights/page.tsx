@@ -180,27 +180,28 @@ export default function InsightsPage() {
       </div>
 
       {/* ════════════════ AI 채팅 섹션 ════════════════ */}
-      <div className="bg-white rounded-2xl border border-gray-100 overflow-hidden shadow-sm">
+      <div className="bg-white rounded-2xl border overflow-hidden" style={{ borderColor: "#E2E8F0" }}>
         {/* 헤더 */}
-        <div className="px-5 py-4 text-white" style={{ background: "linear-gradient(135deg, #1E3A5F 0%, #0F172A 100%)" }}>
+        <div className="px-5 py-4" style={{ backgroundColor: "#EFF6FF" }}>
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-3">
-              <div className="w-10 h-10 bg-white/20 rounded-xl flex items-center justify-center backdrop-blur-sm">
-                <Brain size={20} />
+              <div className="w-10 h-10 rounded-xl flex items-center justify-center" style={{ backgroundColor: "#1A56DB" }}>
+                <Brain size={20} className="text-white" />
               </div>
               <div>
-                <h3 className="font-semibold">덴비 AI 경영 인사이트</h3>
-                <p className="text-xs opacity-80">
+                <h3 className="font-semibold" style={{ color: "#1A56DB" }}>덴비 AI 경영 인사이트</h3>
+                <p className="text-xs" style={{ color: "#64748B" }}>
                   전자차트 데이터를 AI가 분석하여 실시간 경영 인사이트를 제공합니다
-                  {aiAvailable === true && <span className="ml-2 inline-block w-1.5 h-1.5 rounded-full bg-emerald-400" />}
-                  {aiAvailable === false && <span className="ml-2 text-amber-300">· API 키 미설정</span>}
+                  {aiAvailable === true && <span className="ml-2 inline-block w-1.5 h-1.5 rounded-full" style={{ backgroundColor: "#22C55E" }} />}
+                  {aiAvailable === false && <span className="ml-2" style={{ color: "#F59E0B" }}>· API 키 미설정</span>}
                 </p>
               </div>
             </div>
             {messages.length > 0 && (
               <button
                 onClick={() => setMessages([])}
-                className="text-xs bg-white/10 hover:bg-white/20 px-3 py-1.5 rounded-lg flex items-center gap-1"
+                className="text-xs px-3 py-1.5 rounded-lg flex items-center gap-1"
+                style={{ backgroundColor: "white", color: "#64748B", border: "1px solid #E2E8F0" }}
               >
                 <RotateCcw size={12} />새 대화
               </button>

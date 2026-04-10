@@ -22,7 +22,11 @@ app = FastAPI(
 # ─── CORS 설정 ───
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["http://localhost:3000", "http://localhost:3100"],
+    allow_origins=[
+        "http://localhost:3000",
+        "http://localhost:3100",
+        "https://denbi.vercel.app",
+    ],
     allow_credentials=True,  # JWT 쿠키 전송 허용
     allow_methods=["*"],
     allow_headers=["*"],

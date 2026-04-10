@@ -78,8 +78,8 @@ export default function OverviewPage() {
               <XAxis dataKey="month" tick={{ fontSize: 11 }} />
               <YAxis tick={{ fontSize: 11 }} />
               <Tooltip {...CHART_TOOLTIP_STYLE} />
-              <Bar dataKey="newPatients" fill="#8B5CF6" name="신환" radius={[3, 3, 0, 0]} />
-              <Bar dataKey="oldPatients" fill="#e0e7ff" name="구환진료건" radius={[3, 3, 0, 0]} />
+              <Bar dataKey="newPatients" fill="#1A56DB" name="신환" radius={[3, 3, 0, 0]} />
+              <Bar dataKey="oldPatients" fill="#E2E8F0" name="구환진료건" radius={[3, 3, 0, 0]} />
             </BarChart>
           </ResponsiveContainer>
         </div>

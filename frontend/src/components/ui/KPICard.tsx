@@ -4,14 +4,14 @@
  */
 import { ArrowUpRight, ArrowDownRight } from "lucide-react";
 
-/** 색상 테마 매핑 */
+/** 색상 테마 매핑 — 강조색 #1A56DB 통일 */
 const COLOR_MAP: Record<string, string> = {
-  blue:   "bg-blue-50 text-blue-600",
-  green:  "bg-emerald-50 text-emerald-600",
-  purple: "bg-violet-50 text-violet-600",
-  amber:  "bg-amber-50 text-amber-600",
-  red:    "bg-red-50 text-red-600",
-  cyan:   "bg-cyan-50 text-cyan-600",
+  blue:   "",
+  green:  "",
+  purple: "",
+  amber:  "",
+  red:    "",
+  cyan:   "",
 };
 
 interface KPICardProps {
@@ -35,7 +35,8 @@ export default function KPICard({
 }: KPICardProps) {
   return (
     <div
-      className="bg-white rounded-xl border border-gray-100 p-5 hover:shadow-md transition-shadow cursor-default"
+      className="bg-white rounded-xl p-5 transition-all cursor-default"
+      style={{ border: "1px solid #E2E8F0" }}
       onClick={onClick}
     >
       {/* 상단: 라벨 + 아이콘 */}
@@ -44,7 +45,7 @@ export default function KPICard({
           {label}
         </span>
         {Icon && (
-          <div className={`w-8 h-8 rounded-lg flex items-center justify-center ${COLOR_MAP[color] || COLOR_MAP.blue}`}>
+          <div className="w-8 h-8 rounded-lg flex items-center justify-center" style={{ backgroundColor: "#EFF6FF", color: "#1A56DB" }}>
             <Icon size={16} />
           </div>
         )}

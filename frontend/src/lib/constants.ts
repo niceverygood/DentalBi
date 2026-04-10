@@ -9,16 +9,14 @@ import {
 } from "lucide-react";
 import type { Doctor, NavItem } from "@/types";
 
-/** 차트 기본 색상 팔레트 — 덴비 브랜드 */
+/** 차트 기본 색상 팔레트 — 강조색 + 회색 계열 */
 export const CHART_COLORS = [
-  "#1A56DB", "#8B5CF6", "#22C55E", "#F59E0B", "#EF4444",
-  "#0891B2", "#4F46E5", "#EC4899", "#14B8A6", "#F97316",
+  "#1A56DB", "#94A3B8", "#CBD5E1", "#E2E8F0", "#1E293B",
 ];
 
 /** 파이 차트 색상 */
 export const PIE_COLORS = [
-  "#1A56DB", "#22C55E", "#8B5CF6", "#F59E0B", "#0891B2",
-  "#EF4444", "#4F46E5", "#EC4899",
+  "#1A56DB", "#64748B", "#94A3B8", "#CBD5E1", "#E2E8F0",
 ];
 
 /** 사이드바 네비게이션 항목 */
@@ -38,13 +36,13 @@ export const NAV_ITEMS: NavItem[] = [
   // { id: "subscription",  label: "구독 관리",        href: "/subscription",  icon: Crown },
 ];
 
-/** 의사 기본 데이터 (데모용) — 덴비 브랜드 컬러 */
+/** 의사 기본 데이터 (데모용) — 강조색 + 회색 계열 */
 export const DOCTORS: Doctor[] = [
   { id: 1, name: "김원장", role: "대표원장", color: "#1A56DB" },
-  { id: 2, name: "이원장", role: "부원장",   color: "#8B5CF6" },
-  { id: 3, name: "박원장", role: "진료원장", color: "#22C55E" },
-  { id: 4, name: "최원장", role: "진료원장", color: "#F59E0B" },
-  { id: 5, name: "정원장", role: "봉직의",   color: "#EF4444" },
+  { id: 2, name: "이원장", role: "부원장",   color: "#64748B" },
+  { id: 3, name: "박원장", role: "진료원장", color: "#94A3B8" },
+  { id: 4, name: "최원장", role: "진료원장", color: "#CBD5E1" },
+  { id: 5, name: "정원장", role: "봉직의",   color: "#1E293B" },
 ];
 
 /** Recharts 공통 툴팁 스타일 */

@@ -54,7 +54,7 @@ export function genPaymentData(): PaymentDay[] {
       cash: Math.round(30 + Math.random() * 80),
       cashReceipt: Math.round(10 + Math.random() * 40),
       online: Math.round(5 + Math.random() * 30),
-      corp: Math.round(100 + Math.random() * 150),
+      corpFee: Math.round(100 + Math.random() * 150),
     });
   }
   return days;

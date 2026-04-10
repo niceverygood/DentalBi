@@ -27,18 +27,14 @@ export default function Sidebar({ lostPtCount = 0, insightCount = 5 }: SidebarPr
   const superadminActive = pathname.startsWith("/superadmin");
 
   return (
-    <aside className="w-56 flex flex-col flex-shrink-0" style={{ backgroundColor: "#0F172A" }}>
-      {/* 로고 영역 — 덴비 */}
-      <div className="p-5 border-b border-white/10">
+    <aside className="w-56 flex flex-col flex-shrink-0 bg-white" style={{ borderRight: "1px solid #E2E8F0" }}>
+      {/* 로고 영역 */}
+      <div className="p-5" style={{ borderBottom: "1px solid #E2E8F0" }}>
         <div className="flex items-center gap-2.5">
-          {/* 덴비 로고: 파란색 사각형에 D + AI 도트 */}
-          <div className="relative w-9 h-9 rounded-lg flex items-center justify-center" style={{ backgroundColor: "#1A56DB" }}>
-            <span className="text-white font-bold text-lg leading-none">D</span>
-            <div className="absolute -top-1 -right-1 w-3 h-3 rounded-full" style={{ backgroundColor: "#38BDF8" }} />
-          </div>
-          <div>
-            <div className="font-bold text-sm text-white">덴비</div>
-            <div className="text-[10px]" style={{ color: "#64748B" }}>DenBI</div>
+          <img src="/logo.svg" alt="덴비" width={28} height={28} className="rounded-md" />
+          <div className="flex items-baseline gap-1">
+            <span className="font-bold text-lg" style={{ color: "#1A56DB" }}>덴비</span>
+            <span className="text-xs" style={{ color: "#94A3B8" }}>DenBI</span>
           </div>
         </div>
       </div>
@@ -60,17 +56,15 @@ export default function Sidebar({ lostPtCount = 0, insightCount = 5 }: SidebarPr
               key={item.id}
               href={item.href}
               className={`w-full flex items-center gap-2.5 px-3 py-2.5 rounded-lg text-sm transition-all ${
-                active
-                  ? "font-semibold text-white"
-                  : "hover:text-white"
+                active ? "font-semibold" : ""
               }`}
               style={
                 active
-                  ? { backgroundColor: "#1A56DB" }
-                  : { color: "#94A3B8" }
+                  ? { backgroundColor: "#EFF6FF", color: "#1A56DB", borderLeft: "3px solid #1A56DB" }
+                  : { color: "#64748B" }
               }
               onMouseEnter={(e) => {
-                if (!active) e.currentTarget.style.backgroundColor = "#1E293B";
+                if (!active) e.currentTarget.style.backgroundColor = "#F8FAFC";
               }}
               onMouseLeave={(e) => {
                 if (!active) e.currentTarget.style.backgroundColor = "transparent";
@@ -78,7 +72,7 @@ export default function Sidebar({ lostPtCount = 0, insightCount = 5 }: SidebarPr
             >
               <Icon
                 size={16}
-                className={active ? "text-white" : "text-slate-500"}
+                className={active ? "text-[#1A56DB]" : "text-[#94A3B8]"}
               />
               {item.label}
               {badge !== undefined && (
@@ -86,8 +80,8 @@ export default function Sidebar({ lostPtCount = 0, insightCount = 5 }: SidebarPr
                   className="ml-auto text-xs px-1.5 py-0.5 rounded-full font-bold"
                   style={
                     item.id === "patients"
-                      ? { backgroundColor: "rgba(239,68,68,0.2)", color: "#EF4444" }
-                      : { backgroundColor: "rgba(56,189,248,0.2)", color: "#38BDF8" }
+                      ? { backgroundColor: "rgba(239,68,68,0.1)", color: "#EF4444" }
+                      : { backgroundColor: "#EFF6FF", color: "#1A56DB" }
                   }
                 >
                   {badge}
@@ -98,38 +92,36 @@ export default function Sidebar({ lostPtCount = 0, insightCount = 5 }: SidebarPr
         })}
 
         {/* 총괄관리자 콘솔 — 구분선으로 분리 */}
-        <div className="pt-2 mt-2 border-t border-white/10">
+        <div className="pt-2 mt-2" style={{ borderTop: "1px solid #E2E8F0" }}>
           <Link
             href="/superadmin"
             className={`w-full flex items-center gap-2.5 px-3 py-2.5 rounded-lg text-sm transition-all ${
-              superadminActive
-                ? "font-semibold"
-                : ""
+              superadminActive ? "font-semibold" : ""
             }`}
             style={
               superadminActive
-                ? { backgroundColor: "rgba(239,68,68,0.15)", color: "#EF4444" }
+                ? { backgroundColor: "rgba(239,68,68,0.08)", color: "#EF4444" }
                 : { color: "#EF4444" }
             }
           >
-            <Shield size={16} style={{ color: superadminActive ? "#EF4444" : "#EF4444" }} />
+            <Shield size={16} style={{ color: "#EF4444" }} />
             총괄관리자
           </Link>
         </div>
       </nav>
 
       {/* 하단: 슬로건 + 동기화 상태 */}
-      <div className="p-3 border-t border-white/10">
+      <div className="p-3" style={{ borderTop: "1px solid #E2E8F0" }}>
         {/* 동기화 상태 */}
-        <div className="rounded-lg p-3" style={{ backgroundColor: "rgba(34,197,94,0.1)" }}>
+        <div className="rounded-lg p-3" style={{ backgroundColor: "#F8FAFC" }}>
           <div className="flex items-center gap-1.5 mb-1">
             <div className="w-2 h-2 rounded-full animate-pulse-dot" style={{ backgroundColor: "#22C55E" }} />
             <span className="text-xs font-medium" style={{ color: "#22C55E" }}>동기화 완료</span>
           </div>
-          <p className="text-xs" style={{ color: "#22C55E" }}>동기화: 오늘 02:00</p>
+          <p className="text-xs" style={{ color: "#64748B" }}>동기화: 오늘 02:00</p>
         </div>
         {/* 슬로건 */}
-        <p className="text-[10px] text-center mt-2" style={{ color: "#64748B" }}>
+        <p className="text-[10px] text-center mt-2" style={{ color: "#94A3B8" }}>
           통화는 통비서, 경영은 덴비
         </p>
       </div>
