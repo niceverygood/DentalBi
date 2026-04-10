@@ -71,7 +71,7 @@ export default function RootLayout({
 }) {
   const pathname = usePathname();
   const isLoginPage = pathname === "/login";
-  const isPublicPage = pathname.startsWith("/download");
+  const isPublicPage = pathname.startsWith("/download") || pathname.startsWith("/patient");
 
   return (
     <html lang="ko" className="h-full antialiased">
