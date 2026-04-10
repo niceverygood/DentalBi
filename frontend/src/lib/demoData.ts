@@ -286,6 +286,33 @@ export function genCRMStats(): CRMStats {
   };
 }
 
+/** 예약 캘린더 데모 데이터 — 이번 주 기준 */
+export function genAppointments(): import("@/types").Appointment[] {
+  // 이번 주 월요일 구하기
+  const now = new Date();
+  const monday = new Date(now);
+  monday.setDate(now.getDate() - ((now.getDay() + 6) % 7));
+  const iso = (dayOffset: number, hour: number, min: number = 0) => {
+    const d = new Date(monday);
+    d.setDate(d.getDate() + dayOffset);
+    d.setHours(hour, min, 0, 0);
+    return d.toISOString();
+  };
+
+  return [
+    { id: 1, patientName: "한**", type: "appointment", datetime: iso(2, 14, 0), durationMin: 60, treatment: "보철 세팅", staffName: "김원장", callRecordId: 1 },
+    { id: 2, patientName: "최**", type: "appointment", datetime: iso(3, 10, 0), durationMin: 90, treatment: "임플란트 2차수술", staffName: "김원장", callRecordId: 5 },
+    { id: 3, patientName: "이**", type: "callback", datetime: iso(1, 14, 0), durationMin: 15, treatment: "크라운 비용 상담", staffName: "데스크 김", notes: "비용 상담 필요", callRecordId: 3 },
+    { id: 4, patientName: "정**", type: "appointment", datetime: iso(4, 11, 0), durationMin: 30, treatment: "교정 체크", staffName: "이원장", callRecordId: 6 },
+    { id: 5, patientName: "김**", type: "retry", datetime: iso(0, 10, 0), durationMin: 5, treatment: "임플란트 미진행 리콜", staffName: "데스크 박", callRecordId: 2 },
+    { id: 6, patientName: "오**", type: "appointment", datetime: iso(0, 15, 30), durationMin: 45, treatment: "사랑니 발치", staffName: "박원장" },
+    { id: 7, patientName: "강**", type: "appointment", datetime: iso(1, 10, 0), durationMin: 60, treatment: "임플란트 1차 식립", staffName: "김원장" },
+    { id: 8, patientName: "윤**", type: "callback", datetime: iso(3, 15, 0), durationMin: 10, treatment: "레진 재진 안내", staffName: "데스크 김" },
+    { id: 9, patientName: "송**", type: "appointment", datetime: iso(2, 10, 30), durationMin: 30, treatment: "스케일링", staffName: "박원장" },
+    { id: 10, patientName: "조**", type: "appointment", datetime: iso(4, 14, 0), durationMin: 60, treatment: "크라운 세팅", staffName: "이원장" },
+  ];
+}
+
 /** AI 인사이트 데모 데이터 */
 export const AI_INSIGHTS: AIInsight[] = [
   {

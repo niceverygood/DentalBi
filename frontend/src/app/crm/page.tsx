@@ -7,18 +7,21 @@
 import { useState, useMemo } from "react";
 import {
   Phone, PhoneIncoming, PhoneOutgoing, Clock, CheckCircle,
-  PhoneOff, CalendarClock, Search, X, ChevronDown,
+  PhoneOff, CalendarClock, Search, X, ChevronDown, List, Calendar,
 } from "lucide-react";
 import KPICard from "@/components/ui/KPICard";
 import { CallResultBadge } from "@/components/crm/CallResultBadge";
 import { CallSummaryCard } from "@/components/crm/CallSummaryCard";
-import { genCallRecords, genCRMStats } from "@/lib/demoData";
+import AppointmentCalendar from "@/components/crm/AppointmentCalendar";
+import { genCallRecords, genCRMStats, genAppointments } from "@/lib/demoData";
 import type { CallRecord } from "@/types";
 
 export default function CRMPage() {
   const callRecords = useMemo(() => genCallRecords(), []);
   const stats = useMemo(() => genCRMStats(), []);
+  const appointments = useMemo(() => genAppointments(), []);
 
+  const [activeTab, setActiveTab] = useState<"calls" | "calendar">("calls");
   const [selectedCall, setSelectedCall] = useState<CallRecord | null>(null);
   const [filterResult, setFilterResult] = useState<string>("");
   const [searchQuery, setSearchQuery] = useState("");
@@ -73,6 +76,33 @@ export default function CRMPage() {
         <KPICard label="리콜 성공" value={stats.successfulRecalls + "건"} sub="예약 완료" icon={PhoneIncoming} color="purple" />
       </div>
 
+      {/* 탭 전환 */}
+      <div className="flex items-center gap-1 p-1 rounded-lg" style={{ backgroundColor: "#F1F5F9" }}>
+        <button
+          onClick={() => setActiveTab("calls")}
+          className={"flex items-center gap-1.5 px-4 py-2 rounded-md text-sm font-medium transition-all " + (activeTab === "calls" ? "bg-white" : "")}
+          style={activeTab === "calls" ? { color: "#1A56DB" } : { color: "#64748B" }}
+        >
+          <List size={14} />
+          통화 이력
+        </button>
+        <button
+          onClick={() => setActiveTab("calendar")}
+          className={"flex items-center gap-1.5 px-4 py-2 rounded-md text-sm font-medium transition-all " + (activeTab === "calendar" ? "bg-white" : "")}
+          style={activeTab === "calendar" ? { color: "#1A56DB" } : { color: "#64748B" }}
+        >
+          <Calendar size={14} />
+          예약 캘린더
+        </button>
+      </div>
+
+      {/* 캘린더 탭 */}
+      {activeTab === "calendar" && (
+        <AppointmentCalendar appointments={appointments} />
+      )}
+
+      {/* 통화 이력 탭 */}
+      {activeTab === "calls" && <>
       {/* 필터 바 */}
       <div className="flex flex-wrap gap-3 items-center">
         <div className="relative flex-1 min-w-[200px] max-w-md">
@@ -220,6 +250,7 @@ export default function CRMPage() {
           </div>
         )}
       </div>
+      </>}
     </div>
   );
 }

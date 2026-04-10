@@ -278,6 +278,19 @@ export interface CRMStats {
   avgDuration: number;           // 초
 }
 
+/** 예약/콜백 일정 */
+export interface Appointment {
+  id: number;
+  patientName: string;
+  type: "appointment" | "callback" | "retry";
+  datetime: string;
+  durationMin: number;
+  treatment?: string;
+  staffName?: string;
+  notes?: string;
+  callRecordId?: number;
+}
+
 // ═══════════════════════════════════════
 // UI 컴포넌트 Props
 // ═══════════════════════════════════════
